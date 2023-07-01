@@ -56,6 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return duration.toString().split('.').first.substring(2, 7);
   }
 
+  void onResetPressed() {
+    setState(() {
+      totalSeconds = twenty_five_minutes;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,15 +85,26 @@ class _HomeScreenState extends State<HomeScreen> {
           Flexible(
             flex: 2,
             child: Center(
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                icon: Icon(
-                  isRunning
-                      ? Icons.pause_circle_filled_outlined
-                      : Icons.play_circle_outlined,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    onPressed: isRunning ? onPausePressed : onStartPressed,
+                    icon: Icon(
+                      isRunning
+                          ? Icons.pause_circle_filled_outlined
+                          : Icons.play_circle_outlined,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    onPressed: onResetPressed,
+                    icon: const Icon(Icons.refresh_outlined),
+                  ),
+                ],
               ),
             ),
           ),
